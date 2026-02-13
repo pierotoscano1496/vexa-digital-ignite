@@ -1,25 +1,42 @@
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import type { MouseEvent } from "react";
+
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 const Hero = () => {
+  const scrollToId = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // Update hash without abrupt jump (we handle scroll).
+    window.history.replaceState(null, "", `#${id}`);
+
+    el.classList.remove("vexa-target-flash");
+    // Force reflow to restart the animation when clicking multiple times.
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    (el as HTMLElement).offsetWidth;
+    el.classList.add("vexa-target-flash");
+
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => el.classList.remove("vexa-target-flash"), 1400);
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background gradient */}
-      <div 
-        className="absolute inset-0 -z-10"
-        style={{ background: 'var(--vexa-gradient-hero)' }}
-      />
-      
+      <div className="absolute inset-0 -z-10" style={{ background: "var(--vexa-gradient-hero)" }} />
+
       {/* Decorative elements */}
       <div className="absolute top-1/4 left-10 w-72 h-72 bg-vexa-blue/10 rounded-full blur-3xl animate-pulse-soft" />
       <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-vexa-green/10 rounded-full blur-3xl animate-pulse-soft" />
-      
+
       {/* Grid pattern */}
-      <div 
+      <div
         className="absolute inset-0 -z-10 opacity-[0.02]"
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
+          backgroundSize: "40px 40px",
         }}
       />
 
@@ -28,16 +45,12 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-border mb-8 animate-fade-up">
             <Sparkles className="w-4 h-4 text-vexa-blue" />
-            <span className="text-sm font-medium text-muted-foreground">
-              Transformación digital para Perú
-            </span>
+            <span className="text-sm font-medium text-muted-foreground">Transformacion digital para Peru</span>
           </div>
 
           {/* Main heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up-delay-1">
-            Innovamos tu empresa con{' '}
-            <span className="vexa-gradient-text">tecnología inteligente</span>
-            {' '}y sostenible
+            Innovamos tu empresa con <span className="vexa-gradient-text">tecnologia inteligente</span> y sostenible
           </h1>
 
           {/* Subtitle */}
@@ -46,33 +59,34 @@ const Hero = () => {
           </p>
 
           <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-up-delay-2">
-            Soluciones tecnológicas de última generación para empresas peruanas 
-            que buscan liderar el futuro digital.
+            Soluciones tecnologicas de ultima generacion para empresas peruanas que buscan liderar el futuro digital.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up-delay-3">
-            <Button variant="hero" size="xl">
-              Solicitar asesoría
-              <ArrowRight className="w-5 h-5" />
+            <Button variant="hero" size="xl" asChild>
+              <a href="#contacto" onClick={scrollToId("contacto")}>
+                Solicitar asesoria
+                <ArrowRight className="w-5 h-5" />
+              </a>
             </Button>
-            <Button variant="heroOutline" size="xl">
-              Ver soluciones
+            <Button variant="heroOutline" size="xl" asChild>
+              <a href="#soluciones" onClick={scrollToId("soluciones")}>
+                Ver soluciones
+              </a>
             </Button>
           </div>
 
           {/* Stats */}
           <div className="mt-16 pt-16 border-t border-border/50 grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-up-delay-3">
             {[
-              { value: '50+', label: 'Proyectos completados' },
-              { value: '98%', label: 'Clientes satisfechos' },
-              { value: '40%', label: 'Ahorro promedio' },
-              { value: '24/7', label: 'Soporte continuo' },
+              { value: "50+", label: "Proyectos completados" },
+              { value: "98%", label: "Clientes satisfechos" },
+              { value: "40%", label: "Ahorro promedio" },
+              { value: "24/7", label: "Soporte continuo" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold vexa-gradient-text mb-2">
-                  {stat.value}
-                </div>
+                <div className="text-3xl md:text-4xl font-bold vexa-gradient-text mb-2">{stat.value}</div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
             ))}
@@ -84,3 +98,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

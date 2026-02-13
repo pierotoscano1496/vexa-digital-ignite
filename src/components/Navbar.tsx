@@ -1,32 +1,29 @@
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { label: 'Soluciones', href: '#soluciones' },
-    { label: 'Por qué VEXA', href: '#porque-vexa' },
-    { label: 'Proceso', href: '#proceso' },
-    { label: 'Contacto', href: '#contacto' },
+    { label: "Soluciones", href: "#soluciones" },
+    { label: "Por que VEXA", href: "#porque-vexa" },
+    { label: "Proceso", href: "#proceso" },
+    { label: "Contacto", href: "#contacto" },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-card/80 backdrop-blur-lg shadow-vexa-md'
-          : 'bg-transparent'
+        isScrolled ? "bg-card/80 backdrop-blur-lg shadow-vexa-md" : "bg-transparent"
       }`}
     >
       <div className="vexa-container">
@@ -37,7 +34,7 @@ const Navbar = () => {
               <span className="text-primary-foreground font-bold text-lg">V</span>
             </div>
             <span className="font-bold text-xl text-foreground">
-              VEXA<span className="text-muted-foreground font-normal text-sm ml-1">Perú</span>
+              VEXA<span className="text-muted-foreground font-normal text-sm ml-1">Peru</span>
             </span>
           </a>
 
@@ -56,21 +53,14 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="hero" size="lg">
-              Solicitar asesoría
+            <Button variant="hero" size="lg" asChild>
+              <a href="#contacto">Solicitar asesoria</a>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
-            ) : (
-              <Menu className="w-6 h-6 text-foreground" />
-            )}
+          <button className="md:hidden p-2" onClick={() => setIsMobileMenuOpen((v) => !v)}>
+            {isMobileMenuOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
           </button>
         </div>
 
@@ -88,8 +78,10 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
-              <Button variant="hero" size="lg" className="mt-2">
-                Solicitar asesoría
+              <Button variant="hero" size="lg" className="mt-2" asChild>
+                <a href="#contacto" onClick={() => setIsMobileMenuOpen(false)}>
+                  Solicitar asesoria
+                </a>
               </Button>
             </div>
           </div>
@@ -100,3 +92,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
