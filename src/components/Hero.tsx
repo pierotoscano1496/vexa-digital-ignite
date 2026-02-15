@@ -1,7 +1,8 @@
 import type { MouseEvent } from "react";
 
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   const scrollToId = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
@@ -45,12 +46,12 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-border mb-8 animate-fade-up">
             <Sparkles className="w-4 h-4 text-vexa-blue" />
-            <span className="text-sm font-medium text-muted-foreground">Transformacion digital para Peru</span>
+            <span className="text-sm font-medium text-muted-foreground">Transformación digital para Perú</span>
           </div>
 
           {/* Main heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-up-delay-1">
-            Innovamos tu empresa con <span className="vexa-gradient-text">tecnologia inteligente</span> y sostenible
+            Innovamos tu empresa con <span className="vexa-gradient-text">tecnología inteligente</span> y sostenible
           </h1>
 
           {/* Subtitle */}
@@ -59,14 +60,14 @@ const Hero = () => {
           </p>
 
           <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-up-delay-2">
-            Soluciones tecnologicas de ultima generacion para empresas peruanas que buscan liderar el futuro digital.
+            Soluciones tecnológicas de última generación para empresas peruanas que buscan liderar el futuro digital.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up-delay-3">
             <Button variant="hero" size="xl" asChild>
               <a href="#contacto" onClick={scrollToId("contacto")}>
-                Solicitar asesoria
+                Solicitar asesoría
                 <ArrowRight className="w-5 h-5" />
               </a>
             </Button>

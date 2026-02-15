@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 
@@ -14,10 +15,10 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: "Soluciones", href: "#soluciones" },
-    { label: "Por que VEXA", href: "#porque-vexa" },
-    { label: "Proceso", href: "#proceso" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Soluciones", to: "/#soluciones" },
+    { label: "Por qué VEXA", to: "/#porque-vexa" },
+    { label: "Proceso", to: "/#proceso" },
+    { label: "Contacto", to: "/#contacto" },
   ];
 
   return (
@@ -29,32 +30,32 @@ const Navbar = () => {
       <div className="vexa-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-10 h-10 vexa-gradient-bg rounded-xl flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-lg">V</span>
             </div>
             <span className="font-bold text-xl text-foreground">
-              VEXA<span className="text-muted-foreground font-normal text-sm ml-1">Peru</span>
+              VEXA<span className="text-muted-foreground font-normal text-sm ml-1">Perú</span>
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+              <Link
+                key={link.to}
+                to={link.to}
                 className="text-muted-foreground hover:text-foreground transition-colors font-medium"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button variant="hero" size="lg" asChild>
-              <a href="#contacto">Solicitar asesoria</a>
+              <Link to="/#contacto">Solicitar asesoría</Link>
             </Button>
           </div>
 
@@ -69,19 +70,19 @@ const Navbar = () => {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
+                <Link
+                  key={link.to}
+                  to={link.to}
                   className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <Button variant="hero" size="lg" className="mt-2" asChild>
-                <a href="#contacto" onClick={() => setIsMobileMenuOpen(false)}>
-                  Solicitar asesoria
-                </a>
+                <Link to="/#contacto" onClick={() => setIsMobileMenuOpen(false)}>
+                  Solicitar asesoría
+                </Link>
               </Button>
             </div>
           </div>
