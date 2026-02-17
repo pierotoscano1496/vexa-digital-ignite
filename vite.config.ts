@@ -13,7 +13,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  base: "/vexa-digital-ignite/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

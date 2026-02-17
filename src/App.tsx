@@ -15,7 +15,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/vexa-digital-ignite">
+      <BrowserRouter>
         <ScrollToHash />
         <Routes>
           <Route path="/" element={<Index />} />

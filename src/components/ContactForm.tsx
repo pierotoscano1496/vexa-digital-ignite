@@ -234,7 +234,7 @@ export default function ContactForm() {
                 <FormLabel>Telefono (opcional)</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="+51 999 888 777"
+                    placeholder="+51 989 326 647"
                     type="tel"
                     autoComplete="tel"
                     {...field}
