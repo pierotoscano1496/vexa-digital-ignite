@@ -1,4 +1,4 @@
-name: Despliegue de Vexa PerÃº
+name: Despliegue de Vexa Perú
 
 on:
   push:
@@ -8,37 +8,33 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
       - name: Configurar Node
         uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: "npm"
+
       - name: Instalar dependencias
         run: npm ci
+
       - name: Construir
         run: npm run build
-      - name: Configurar Pages
-        uses: actions/configure-pages@v5
-      - name: Subir artefacto
-        uses: actions/upload-pages-artifact@v4
+
+      - name: Desplegar a Hostinger (FTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          path: "./dist"
-      - name: Desplegar a GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          server: 185.239.210.195
+          username: u104725963
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          port: 21
+          protocol: ftp
+          local-dir: ./dist/
+          server-dir: /domains/vexaperu.com/public_html/
